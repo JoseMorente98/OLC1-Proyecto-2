@@ -7,8 +7,4 @@ var express_1 = require("express");
 var usuario_controller_1 = __importDefault(require("./../controller/usuario.controller"));
 var usuario = express_1.Router();
 usuario.get('/usuario', usuario_controller_1.default.getInstance().getAll);
-usuario.get('/usuario/:id', usuario_controller_1.default.getInstance().getSingle);
-usuario.post('/usuario', usuario_controller_1.default.getInstance().create);
-usuario.put('/usuario/:id', usuario_controller_1.default.getInstance().update);
-usuario.delete('/usuario/:id', usuario_controller_1.default.getInstance().delete);
 exports.default = usuario;

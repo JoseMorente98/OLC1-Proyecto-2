@@ -7,6 +7,9 @@ var server_1 = __importDefault(require("./server/server"));
 var usuario_router_1 = __importDefault(require("./router/usuario.router"));
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+//0LAF4cDDKvvSQetT
+//jose-morente
+//mongodb+srv://jose-morente:0LAF4cDDKvvSQetT@cluster0-shard-00-02-lnx95.mongodb.net/test
 /**
  * CONFIGURACIÓN DE PUERTO LOCAL Y PRODUCCIÓN
  */

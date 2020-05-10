@@ -1,5 +1,4 @@
 import Server from "./server/server";
-import MySQL from "./mysql/mysql";
 import usuario from "./router/usuario.router";
 import bodyParser = require('body-parser');
 import mongoose = require('mongoose');
