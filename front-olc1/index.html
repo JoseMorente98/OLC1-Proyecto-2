@@ -42,14 +42,18 @@
                 readonly></textarea>
             </div>
             <div class="col-md-10">
-                <textarea class="form-control txt" name="textAreaAnalizar" id="textAreaAnalizar"
+                <textarea class="form-control txt" name="editorDeTexto" id="editorDeTexto"
                     style="width: 100%; height: 300px;" nowrap="nowrap" wrap="off"
                     autocomplete="off" autocorrect="off" autocapitalize="off"
                     spellcheck="false" oninput="input_changed(this)"
                     onchange="input_changed(this)"
                     onscroll="scroll_changed(this)">{{ .Text }}</textarea>
+                    <form name="myForm" class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <input type="file" name="myInput" class="btn btn-outline-dark form-control-file">
+                    </form>
             </div>
         </div>
+        
         <h1 class="display-4">Editor de Texto 2</h1>
         <hr class="my-4">
         <div class="row">
@@ -58,15 +62,22 @@
                 readonly></textarea>
             </div>
             <div class="col-md-10">
-                <textarea class="form-control txt" name="textAreaAnalizar" id="textAreaAnalizar"
+                <textarea class="form-control txt" name="editorDeTexto2" id="editorDeTexto2"
                     style="width: 100%; height: 300px;" nowrap="nowrap" wrap="off"
                     autocomplete="off" autocorrect="off" autocapitalize="off"
                     spellcheck="false" oninput="input_changed(this)"
                     onchange="input_changed(this)"
                     onscroll="scroll_changed(this)">{{ .Text }}</textarea>
+                    <form name="myForm2" class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <input type="file" name="myInput2" class="btn btn-outline-dark form-control-file">
+                        <button type="button" class="btn btn-outline-dark">Leer</button>
+                    </form>
             </div>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -112,6 +123,55 @@
                 return 1;
             }
             return txt.split('\n').length + 1;
+        }
+        
+
+        //LECTURA DE ARCHIVO
+        var input = myForm.myInput;
+        var reader = new FileReader;
+
+        input.addEventListener('change', onChange);
+
+        function onChange(event) {
+            var file = event.target.files[0];            
+            reader.readAsText(file);            
+            reader.onload = onLoad;
+        }
+
+        function onLoad() {
+            var result = reader.result;
+            var lineas = result.split('\n');
+            var strEntrada = "";
+            for(var linea of lineas) {
+                console.log('[linea]', linea)
+                strEntrada = strEntrada + linea;
+            }            
+            const textArea = document.getElementById("editorDeTexto");
+            textArea.textContent = strEntrada;
+        }
+
+        //LECTURA DE ARCHIVO 2
+        var input2 = myForm2.myInput2;
+        var reader2 = new FileReader;
+
+        input2.addEventListener('change', onChange2);
+
+        function onChange2(event) {
+            var file = event.target.files[0];            
+            reader2.readAsText(file);            
+            reader2.onload = onLoad2;
+        }
+
+        function onLoad2() {
+            var result = reader2.result;
+            var lineas = result.split('\n');
+            var strEntrada = "";
+            for(var linea of lineas) {
+                console.log('[linea]', linea)
+                strEntrada = strEntrada + linea;
+            }            
+            const textArea2 = document.getElementById("editorDeTexto2");
+            textArea2.textContent = strEntrada;
         }
     </SCRIPT>    
 </body>

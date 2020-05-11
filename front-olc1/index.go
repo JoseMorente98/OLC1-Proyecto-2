@@ -6,12 +6,6 @@ import (
 	"net/http"
 )
 
-type Page struct {
-	Tittle  string
-	Text    string
-	Console string
-}
-
 func index(w http.ResponseWriter, r *http.Request) {
 	t := template.Must(template.ParseFiles("index.html"))
 	t.Execute(w, nil)
@@ -53,31 +47,3 @@ func main() {
 	fmt.Println("Servidor corriendo en el puerto: 8100")
 	http.ListenAndServe(":8100", nil)
 }
-
-/*
-package main
-
-import (
-	"fmt"
-	"github.com/gorilla/mux"
-	"net/http"
-	"text/template"
-)
-
-func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	//w.Write([]byte("Gorilla!\n"))
-	t := template.Must(template.ParseFiles("index.html"))
-	t.Execute(w, nil)
-}
-
-func main() {
-	r := mux.NewRouter()
-	// Routes consist of a path and a handler function.
-	http.HandleFunc("/", HomeHandler)
-	r.HandleFunc("/products", HomeHandler)
-	r.HandleFunc("/articles", HomeHandler)
-
-	fmt.Println("Servidor corriendo en el puerto: 8100")
-	http.ListenAndServe(":8100", nil)
-}
-*/
