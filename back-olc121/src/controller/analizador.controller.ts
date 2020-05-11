@@ -3,7 +3,7 @@ import { TokenControlador } from "../controlador/token.controlador";
 import { Token } from '../model/token.model';
 //import { AnalizadorJISON } from '../jison/analizador.jison';
 //SCANNER
-var AnalizadorJISON = require("../jison/analizador-lexico")
+import AnalizadorJISON = require("../jison/analizador-lexico")
 
 export default class AnalizadorController {
     private static _instance: AnalizadorController;
