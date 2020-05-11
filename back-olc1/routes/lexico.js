@@ -57,4 +57,23 @@ router.get('/token', function(req, res, next) {
     res.status(200).json(arregloResponse);
 });
 
+router.get('/error', function(req, res, next) {
+    var arregloToken = [];
+    var arregloResponse = [];
+    arregloToken = tokenControlador.getArregloError();
+
+    arregloToken.forEach(element => {
+        var data = {
+            id: element.id,
+            lexema: element.lexema,
+            descripcion: element.descripcion,
+            fila: element.fila,
+            columna: element.columna
+        }
+        arregloResponse.push(data);
+    });
+
+    res.status(200).json(arregloResponse);
+});
+
 module.exports = router;
