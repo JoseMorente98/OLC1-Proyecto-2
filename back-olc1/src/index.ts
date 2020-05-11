@@ -1,5 +1,5 @@
 import Server from "./server/server";
-import usuario from "./router/usuario.router";
+import usuario from "./router/analizador.route";
 import bodyParser = require('body-parser');
 import mongoose = require('mongoose');
 //0LAF4cDDKvvSQetT

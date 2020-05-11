@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var server_1 = __importDefault(require("./server/server"));
-var usuario_router_1 = __importDefault(require("./router/usuario.router"));
+var analizador_route_1 = __importDefault(require("./router/analizador.route"));
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 //0LAF4cDDKvvSQetT
@@ -45,7 +45,7 @@ server.app.use(bodyParser.urlencoded({ extended: false }));
 /**
  * API'S
  */
-server.app.use(api, usuario_router_1.default);
+server.app.use(api, analizador_route_1.default);
 server.start(function () {
     console.log("Servidor corriendo en el puerto 3000 :D");
 });
