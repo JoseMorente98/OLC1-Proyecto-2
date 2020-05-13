@@ -33,8 +33,8 @@
     </nav>
 
     <div class="container">
-        <h1 class="display-4">Tokens</h1>
-        <p class="lead">Reporte de tokens del análisis léxico.</p>
+        <h1 class="display-4">Errores Sintácticos</h1>
+        <p class="lead">Reporte de errores del análisis Sintáctico.</p>
         <hr class="my-4">
         <table class="table">
             <thead class="thead-light">
@@ -46,45 +46,43 @@
                 <th scope="col">Columna</th>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-            </tr>
-            </tbody>
-        </table>    
-
-        <h1 class="display-4">Tokens Errores</h1>
-        <p class="lead">Reporte de tokens errores del análisis léxico.</p>
-        <hr class="my-4">
-        <table class="table">
-            <thead class="thead-light">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Lexema</th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Fila</th>
-                <th scope="col">Columna</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-            </tr>
+            <tbody id="demo">
+            
             </tbody>
         </table>    
     </div>
     
     
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+    <SCRIPT Language="javascript">
+        $( document ).ready(function() {
+            var root = 'http://localhost:3000';
+            var miArray = [];
+            $.ajax({
+                url: root + '/lexico/token',
+                method: 'GET',
+                dataType: 'json',
+            }).then(function(data) {
+                console.log(data);
+                miArray = [];
+                miArray = data;
+                var strText = "";
+                miArray.forEach(element => {
+                    console.log(element)
+                    strText = strText + '<tr>'+
+                        '<th scope="row">' + element.id + '</th>'+
+                        '<td>' + element.lexema + '</td>'+
+                        '<td>' + element.descripcion + '</td>'+
+                        '<td>' + element.fila + '</td>'+
+                        '<td>' + element.columna + '</td>'+
+                    '</tr>';
+                });
+                document.getElementById("demo").innerHTML = strText;
+            });
+        });
+    </SCRIPT>
 </body>
 </html>

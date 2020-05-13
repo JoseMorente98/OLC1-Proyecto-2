@@ -1,3 +1,4 @@
+
 %lex
 %options ranges
 
@@ -104,4 +105,47 @@ BSL               "\\".
 <<EOF>>               return 'EOF';
 .                     return 'TK_Desconocido';
 
+/lex
+
+%start INICIO
+
 %%
+
+INICIO     
+    :/* empty */    
+    | INSTRUCCION EOF      
+    ;
+
+//INSTRUCCIONES GLOBALES
+INSTRUCCION 
+    : INSTRUCCION INICIOCLASE   { $$ = $1; $$.push($2); }
+    | INICIOCLASE                { $$ = [$1]; }
+    ;
+
+//GLOBALES
+INICIOCLASE
+    : CLASE             {$$ = $1;}
+    | error             {$$ = new Exception(yytext, "ERROR SINTACTICO: " + yytext + " en linea: " + (this._$.first_line - 1) 
+                                                    + ", columna: " +  this._$.last_column, this._$.first_line, this._$.first_column)}
+    ;
+
+/*SECCION CLASS*/
+CLASE 
+    : IMPORT 'TK_class' identifier 'TK_LlaveIzquierdo' INSTRUCCION 'TK_LlaveDerecho' {$$ = new Class($3, $5, $1);} 
+    ;
+RETURN 
+    : EXPRESION 'TK_PuntoComa'     {$$ = $1;}
+    | 'TK_PuntoComa'               {$$ = [];}
+    ;
+
+/* SECCION IMPORT */
+
+IMPORTS
+    : IMPORTS IMPORT    { $$ = $1; $$.push($2); }  
+    | IMPORT            {$$ = $1;}
+    ;
+
+IMPORT
+    : 'PR_import' 'TK_Identificador' 'TK_DosPuntos' {$$ = new Import($2,  this._$.first_line, this._$.first_column);}
+    //| //EPSILON
+    ;

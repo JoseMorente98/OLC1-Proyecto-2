@@ -33,6 +33,7 @@ router.post('/', function(req, res, next) {
     }
 
     res.status(200).json({
+        status: 200,
         ok: true,
         data: "Análisis Completo"
     });
