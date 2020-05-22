@@ -7,6 +7,7 @@
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -33,58 +34,271 @@
     </nav>
 
     <div class="container">
-        <h1 class="display-4">Tokens</h1>
-        <p class="lead">Reporte de tokens del análisis léxico.</p>
+        <h1 class="display-4">Arbol AST</h1>
+        <p class="lead">Reporte de ARBOL AST del análisis sintáctico.</p>
+        <button class="btn btn-outline-dark" onclick="window.print()" role="button"><i class="fas fa-save"></i> Guardar Reporte</button>
         <hr class="my-4">
-        <table class="table">
-            <thead class="thead-light">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Lexema</th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Fila</th>
-                <th scope="col">Columna</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-            </tr>
-            </tbody>
-        </table>    
-
-        <h1 class="display-4">Tokens Errores</h1>
-        <p class="lead">Reporte de tokens errores del análisis léxico.</p>
-        <hr class="my-4">
-        <table class="table">
-            <thead class="thead-light">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Lexema</th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Fila</th>
-                <th scope="col">Columna</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-            </tr>
-            </tbody>
-        </table>    
+        <div class="tree ">
+            <ul>
+                <li>
+                    <span><a style="color:#365902; text-decoration:none;" data-toggle="collapse" href="#Class" aria-expanded="true"aria-controls="Class"><i class="collapsed"><i class="fas fa-tree"></i></i><i class="expanded"><i class="fas fa-tree"></i></i> Clase</a></span>
+                    <div id="Class" class="collapse show"><ul><li><span><a style="color:#365902; text-decoration:none;" data-toggle="collapse" href="#instList" aria-expanded="false" aria-controls="instList"><i class="collapsed"><i class="fas fa-leaf"></i></i><i class="expanded"><i class="fas fa-leaf"></i></i> Lista de Instrucciones</a></span><ul>
+                        <div id="ArbolAST"></div>
+                    </div></ul></li></ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
-    
     
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <SCRIPT Language="javascript">
+        var strArbolAST = "";
+        $( document ).ready(function() {
+            var arbolAST = JSON.parse(localStorage.getItem("currentAST"));
+            obtenerElemento(arbolAST, "_ast_")
+            ////console.log(strArbolAST)
+            document.getElementById("ArbolAST").innerHTML = strArbolAST;
+        });
+
+        function obtenerElemento(lista, id) {
+            for (let i = 0; i < lista.length; i++) {
+                const token = lista[i];
+                strArbolAST = strArbolAST + "<li><span>" +
+                        "<a style=\"color:#365902; text-decoration:none;\" data-toggle=\"collapse\" href=\"#" + token.nombre + id + i +
+                        "\" aria-expanded=\"false\" aria-controls=\"" + token.nombre + id + i + "\">" +
+                        "<i class=\"collapsed\">" +
+                        "<i class=\"fas fa-leaf\"></i></i>" +
+                        "<i class=\"expanded\"><i class=\"fas fa-leaf\"></i></i> " + token.nombre + "</a></span>" +
+                        "<ul><div id=\"" + token.nombre + id + i + "\" class=\"collapse\">";
+                
+                switch (token.nombre) {
+                    case "Declaracion":
+                        tipoDatoPrimitivo(token.tipo.nombre, token.tipo.nombre + id + i);
+                        ////console.log("DECLARACION")
+                        ////console.log(token)
+                        if(token.datos != null){
+                            asignacionYDeclaracion("Data" + id + i, token.datos.nombre + id + i, token.datos.nombre, token.datos.nombre);
+                        }
+                        break;
+                    case "Asignacion":
+                        ////console.log("ASIGNACION")
+                        ////console.log(token)
+                        if(token.datos != null){
+                            asignacionYDeclaracion("Data" + id + i, token.datos.nombre + id + i, token.datos.nombre, token.datos.nombre);
+                        }
+                        break;
+                    case "Comentario":
+                    ////console.log("COMENTARIO")
+                        ////console.log(token)
+                        strArbolAST = strArbolAST + "<li><span><i class=\"fab fa-envira\"></i><a> " + token.tipo + "</a></span></li>\n";
+                        break;
+                    case "Imprimir":
+                        ////console.log("IMPRIMIR")
+                        ////console.log(token)
+                        strArbolAST = strArbolAST + "<li><span><i class=\"fab fa-envira\"></i><a> " + token.parametro.nombre + "</a></span></li>\n";
+                        break;
+                    case "If":
+                        ////console.log("IF")
+                        ////console.log(token)
+                        listaCondiciones(token.nombre + id + (i+1), token.condicion.nombre);
+                        sentenciaIf(token.lista, token.elseif , "if"+id + i);
+                        break;
+                    case "Else":
+                        ////console.log("ELSE")
+                        ////console.log(token)
+                        listaDeclaracion(token.lista, "else" + id + i);
+                        break;
+                    case "Switch":
+                        ////console.log("SWITCH")
+                        ////console.log(token)
+                        listaCondiciones(token.nombre + id + (i+i), token.condicion.nombre);
+                        sentenciaIf(token.lista, token.def, "switch" + id + i);
+                        break;
+                    case "Case":
+                        ////console.log("CASE")
+                        ////console.log(token)
+                        listaCondiciones(token.nombre + id + (i+i+1), token.condicion.nombre);
+                        listaDeclaracion(token.lista, "case"+ i +id + (i+i+2));
+                        break;
+                    case "Default":
+                        ////console.log("DEFAULT")
+                        ////console.log(token)
+                        listaDeclaracion(token.lista, "default" +id + (i+i+3));
+                        break;
+                    case "Break":
+                        strArbolAST = strArbolAST + "<li><span><i class=\"fab fa-envira\"></i><a> " + token.nombre + "</a></span></li>\n";
+                        break;
+                    case "Continue":
+                        strArbolAST = strArbolAST + "<li><span><i class=\"fab fa-envira\"></i><a> " + token.nombre + "</a></span></li>\n";
+                        break;
+                    case "Return":
+                        ////console.log("RETURN")
+                        ////console.log(token)
+                        listaDeclaracion(token.lista, "return" + id + (i+1))
+                        break;
+                    case "While":
+                        ////console.log("WHILE")
+                        ////console.log(token)
+                        listaCondiciones(token.nombre + id + (i+i+1), token.condicion.nombre);
+                        listaDeclaracion(token.lista, "while" +id + (i+i+2));
+                        break;
+                    case "DoWhile":
+                        ////console.log("DO WHILE")
+                        ////console.log(token)
+                        listaDeclaracion(token.lista, "dowhile" + id + (i+i+2));
+                        listaCondiciones(token.nombre + id + (i+i+1), token.condicion.nombre);
+                        break;
+                    case "For":
+                        ////console.log("FOR ")
+                        ////console.log(token)
+                        obtenerElemento([token.asignacion])
+                        listaCondiciones(token.nombre + id + (i+i+1), token.condicion.nombre);
+                        strArbolAST = strArbolAST + "<li><span><i class=\"fab fa-envira\"></i><a> " + token.incremento.nombre + "</a></span></li>\n";
+                        listaDeclaracion(token.lista, "for" + id + (i+i+i))
+                        break;
+                    case "Funcion":
+                        ////console.log("FUNCION")
+                        ////console.log(token)
+                        tipoDatoPrimitivo(token.tipo.nombre, token.tipo.nombre + id + i);
+                        listaParametros(token.parametro, token.nombre + id + (i+i+1));
+                        listaDeclaracion(token.lista, token.nombre + id + (i+i+2))
+                        break;
+                    case "Metodo":
+                        ////console.log("METODO")
+                        ////console.log(token)
+                        listaParametros(token.parametro, token.nombre + id + (i+i+1));
+                        listaDeclaracion(token.lista, token.nombre + id + (i+i+2));
+                        break;
+                    case "LlamadaFuncion":
+                        ////console.log("LLAMADA FUNCION")
+                        ////console.log(token)
+                        obtenerElemento(token.lista);
+                        break;
+                }
+    
+                strArbolAST = strArbolAST + "</ul>\n</li>";
+            }
+        }
+    
+        /**
+         * ARBOL AST SENTENCIA IF 
+         */
+        function sentenciaIf(lista, elseList, tagIdentificador){
+            ////console.log("_______________________________________________________")
+            ////console.log(lista)
+            ////console.log(elseList)
+            ////console.log(id)
+            strArbolAST = strArbolAST + "<li><span>" +
+            "<a style=\"color:#365902; text-decoration:none;\" data-toggle=\"collapse\" href=\"#" + "lst" + tagIdentificador +
+            "\" aria-expanded=\"false\" aria-controls=\"" + "lst" + tagIdentificador + "\">" +
+            "<i class=\"collapsed\">" +
+            "<i class=\"fas fa-leaf\"></i></i>" +
+            "<i class=\"expanded\"><i class=\"fas fa-leaf\"></i></i> " + "Lista de Instruccion" + "</a></span>" +
+            "<ul><div id=\"" + "lst" + tagIdentificador + "\" class=\"collapse\">";
+                
+            obtenerElemento(lista, tagIdentificador);
+            obtenerElemento(elseList, tagIdentificador);
+            strArbolAST = strArbolAST  + "</div></ul></li>";
+        }
+    
+        /**
+         * ARBOL AST listaCondiciones 
+         */
+        function listaCondiciones(idElement, condicion){
+            strArbolAST = strArbolAST + "<li><span>" +
+            "<a style=\"color:#365902; text-decoration:none;\" data-toggle=\"collapse\" href=\"#" + idElement +
+            "\" aria-expanded=\"false\" aria-controls=\"" + idElement + "\">" +
+            "<i class=\"collapsed\">" +
+            "<i class=\"fas fa-leaf\"></i></i>" +
+            "<i class=\"expanded\"><i class=\"fas fa-leaf\"></i></i> " + "Condicion" + "</a></span>" +
+            "<ul><div id=\"" + idElement + "\" class=\"collapse\">";
+            strArbolAST = strArbolAST + "<li><span><i class=\"fab fa-envira\"></i><a>" + "  " + condicion + "</a></span></li>\n";
+            strArbolAST = strArbolAST  + "</div></ul></li>";
+        }
+    
+        /**
+         * ARBOL AST MAS INSTRUCCIONES
+         */
+        function listaDeclaracion(lista, tagIdentificador){
+            strArbolAST = strArbolAST + "<li><span>" +
+            "<a style=\"color:#365902; text-decoration:none;\" data-toggle=\"collapse\" href=\"#" + "lst" + tagIdentificador +
+            "\" aria-expanded=\"false\" aria-controls=\"" + "lst" + tagIdentificador + "\">" +
+            "<i class=\"collapsed\">" +
+            "<i class=\"fas fa-leaf\"></i></i>" +
+            "<i class=\"expanded\"><i class=\"fas fa-leaf\"></i></i> " + "Lista de Instruccion" + "</a></span>" +
+            "<ul><div id=\"" + "lst" + tagIdentificador + "\" class=\"collapse\">";
+    
+            obtenerElemento(lista, tagIdentificador)
+            strArbolAST = strArbolAST  + "</div></ul></li>";
+        }
+    
+        /**
+         * ARBOL AST ASIGNACION Y DECLARACION
+         */
+        function asignacionYDeclaracion(tagNombre, tagIdentificador, nombre, tipo){
+            //console.log(tagNombre)
+            //console.log(tagIdentificador)
+            //console.log(nombre)
+            //console.log(tipo)
+            strArbolAST = strArbolAST + "<li><span>" +
+                "<a style=\"color:#365902; text-decoration:none;\" data-toggle=\"collapse\" href=\"#" + tagNombre +
+                "\" aria-expanded=\"false\" aria-controls=\"" + tagIdentificador + "\">" +
+                "<i class=\"collapsed\">" +
+                "<i class=\"fas fa-leaf\"></i></i>" +
+                "<i class=\"expanded\"><i class=\"fas fa-leaf\"></i></i> " + "Data" + "</a></span>" +
+                "<ul><div id=\"" + tagNombre + "\" class=\"collapse\">";
+    
+            strArbolAST = strArbolAST + "<li><span>" +
+                "<a style=\"color:#365902; text-decoration:none;\" data-toggle=\"collapse\" href=\"#" + tagIdentificador +
+                "\" aria-expanded=\"false\" aria-controls=\"" + tagIdentificador + "\">" +
+                "<i class=\"collapsed\">" +
+                "<i class=\"fas fa-leaf\"></i></i>" +
+                "<i class=\"expanded\"><i class=\"fas fa-leaf\"></i></i> " + nombre + "</a></span>" +
+                "<ul><div id=\"" + tagIdentificador + "\" class=\"collapse\">";
+                strArbolAST = strArbolAST + "<li><span><i class=\"fab fa-envira\"></i><a>" + "  " + tipo + "</a></span></li>\n";
+                strArbolAST = strArbolAST + "</ul>\n</li>";
+            strArbolAST = strArbolAST + "</ul>\n</li>";
+        }
+    
+        /**
+         * ARBOL AST TIPO DE DATO
+         */
+        function tipoDatoPrimitivo(nombre, token){
+            ////console.log("TIPO DE DATOS")
+            ////console.log(nombre)
+            ////console.log(token)
+            strArbolAST = strArbolAST + "<li><span>" +
+                "<a style=\"color:#365902; text-decoration:none;\" data-toggle=\"collapse\" href=\"#" + token +
+                "\" aria-expanded=\"false\" aria-controls=\"" + token + "\">" +
+                "<i class=\"collapsed\">" +
+                "<i class=\"fas fa-leaf\"></i></i>" +
+                "<i class=\"expanded\"><i class=\"fas fa-leaf\"></i></i> " + nombre + "</a></span>" +
+                "<ul><div id=\"" + token + "\" class=\"collapse\">";
+                strArbolAST = strArbolAST + "<li><span><i class=\"fab fa-envira\"></i><a> " + "Dato Primitivo" + "</a></span></li>\n";
+                strArbolAST = strArbolAST + "</ul>\n</li>";
+        }
+    
+        /**
+         * ARBOL AST PARAMETROS 
+         */
+        function listaParametros(lista, token){
+            //console.log(lista)
+            //console.log(token)
+            strArbolAST = strArbolAST + "<li><span>" +
+                "<a style=\"color:#365902; text-decoration:none;\" data-toggle=\"collapse\" href=\"#" + token +
+                "\" aria-expanded=\"false\" aria-controls=\"" + token + "\">" +
+                "<i class=\"collapsed\">" +
+                "<i class=\"fas fa-leaf\"></i></i>" +
+                "<i class=\"expanded\"><i class=\"fas fa-leaf\"></i></i> " + "Parametro" + "</a></span>" +
+                "<ul><div id=\"" + token + "\" class=\"collapse\">";
+            
+            obtenerElemento(lista, token);                  
+            strArbolAST = strArbolAST + "</ul>\n</li>";    
+        }
+    </SCRIPT>
+    <style>.tree li { list-style-type:none; margin:0; padding:10px 5px 0 5px; position:relative }.tree li::before, .tree li::after {content:'';left:-20px; position:absolute; right:auto}.tree li::before { border-left:2px solid #365902; bottom:50px; height:100%; top:0; width:1px}.tree li::after { border-top:2px solid #365902; height:20px; top:25px; width:25px }.tree li span { -moz-border-radius:5px; -webkit-border-radius:5px; border:2px solid #365902; border-radius:3px; display:inline-block; padding:3px 8px; text-decoration:none; cursor:pointer; }.tree>ul>li::before, .tree>ul>li::after { border:0 }.tree li:last-child::before { height:27px } .tree li span:hover { background: #007bff; border:2px solid #007bff; }[aria-expanded="false"] > .expanded, [aria-expanded="true"] > .collapsed { display: none; }</style>
 </body>
 </html>

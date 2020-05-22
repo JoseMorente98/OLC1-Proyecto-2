@@ -6,6 +6,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
@@ -35,6 +36,7 @@
     <div class="container">
         <h1 class="display-4">Errores Sintácticos</h1>
         <p class="lead">Reporte de errores del análisis Sintáctico.</p>
+        <button class="btn btn-outline-dark" onclick="window.print()" role="button"><i class="fas fa-save"></i> Guardar Reporte</button>
         <hr class="my-4">
         <table class="table">
             <thead class="thead-light">
@@ -62,7 +64,7 @@
             var root = 'http://localhost:3000';
             var miArray = [];
             $.ajax({
-                url: root + '/lexico/token',
+                url: root + '/sintactico/error',
                 method: 'GET',
                 dataType: 'json',
             }).then(function(data) {

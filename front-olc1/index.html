@@ -195,13 +195,19 @@
                 var textAreaEditorDeTexto = document.getElementById("editorDeTexto");
                 console.log(textAreaEditorDeTexto.value);
                 $.ajax({
-                    url: root + '/lexico',
+                    url: root + '/sintactico',
                     method: 'POST',
                     dataType: 'json',
                     data: {
-                        entrada: textAreaEditorDeTexto.value
+                        entrada: textAreaEditorDeTexto.value,
+                        entradaCopia: textAreaEditorDeTexto.value
                     }
                 }).then(function(data) {
+                    console.log(data.ast);
+                    localStorage.setItem("currentAST", JSON.stringify(data.ast.lista));
+                    var AST = localStorage.getItem("currentAST");
+                    console.log(data.ast)
+                    console.log(JSON.parse(AST))
                     if(data.status == 200) {
                         $('#analisisExito').show();
                         setTimeout(() => {
