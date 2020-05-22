@@ -14,7 +14,7 @@ class ExpresionAritmetica {
     * CONSTRUCTOR
     */
     constructor(expresionIzquierda, expresionDerecha, operador, fila, columna) {
-        this.nombre = "Expresion Aritmetica";
+        this.nombre = "ExpresionAritmetica";
         this.expresionIzquierda = expresionIzquierda;
         this.right = expresionDerecha;
         this.operador = operador;

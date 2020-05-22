@@ -12,7 +12,7 @@ class LlamadaFuncion  {
     * CONSTRUCTOR
     */
     constructor(identificador, lista, fila, columna) {
-        this.nombre = "Llamada Funcion";
+        this.nombre = "LlamadaFuncion";
         this.identificador = identificador;
         this.lista  = lista;
         this.fila  = fila;

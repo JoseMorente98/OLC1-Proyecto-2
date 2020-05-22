@@ -12,7 +12,7 @@ class SentenciaDoWhile  {
     * CONSTRUCTOR
     */
     constructor( lista, condicion, fila, columna) {
-        this.nombre = "Do While";
+        this.nombre = "DoWhile";
         this.condicion = condicion;
         this.lista  = lista;
         this.fila  = fila;

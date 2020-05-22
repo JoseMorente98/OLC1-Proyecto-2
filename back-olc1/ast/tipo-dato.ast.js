@@ -9,7 +9,7 @@ class TipoDato{
     * CONSTRUCTOR
     */
     constructor(tipo){
-        this.nombre = "Tipo de Dato";
+        this.nombre = "TipoDato";
         this.tipo = tipo;
     }
 

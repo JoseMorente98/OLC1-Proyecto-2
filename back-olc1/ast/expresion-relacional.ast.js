@@ -14,7 +14,7 @@ class ExpresionRelacional {
     * CONSTRUCTOR
     */
     constructor(expresionIzquierda, expresionDerecha, operador, fila, columna) {
-        this.nombre = "Expresion Relacional";
+        this.nombre = "ExpresionRelacional";
         this.expresionIzquierda = expresionIzquierda;
         this.right = expresionDerecha;
         this.operador = operador;

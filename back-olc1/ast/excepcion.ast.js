@@ -12,7 +12,7 @@ class Excepcion {
      * CONSTRUCTOR
      */
     constructor(tipo, descripcion, fila, columna) {
-        this.nombre = "Else";
+        this.nombre = "Excepcion";
         this.tipo  = tipo;
         this.descripcion  = descripcion;
         this.fila  = fila;
@@ -23,7 +23,7 @@ class Excepcion {
      * TO STRING
      */
     toString() {
-        return `${this.type} ${this.description} ${this.line} ${this.column}`;
+        return `${this.tipo} ${this.descripcion} ${this.fila} ${this.columna}`;
     }
 }
 

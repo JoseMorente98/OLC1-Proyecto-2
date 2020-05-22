@@ -7,6 +7,8 @@ var bodyParser = require("body-parser");
 
 var indexRouter = require('./routes/index');
 var lexicoRouter = require('./routes/lexico');
+var sintacticoRouter = require('./routes/sintactico');
+var detectorRouter = require('./routes/detector');
 
 var app = express();
 
@@ -33,6 +35,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/lexico', lexicoRouter);
+app.use('/sintactico', sintacticoRouter);
+app.use('/detector', detectorRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

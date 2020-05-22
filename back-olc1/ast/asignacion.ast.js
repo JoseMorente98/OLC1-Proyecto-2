@@ -13,7 +13,7 @@ class Asignacion {
     * CONSTRUCTOR
     */
     constructor(identificador, datos, fila, columna) {
-        this.nombre = "Asignación";
+        this.nombre = "Asignacion";
         this.identificador = identificador;
         this.datos = datos;
         this.fila  = fila;
