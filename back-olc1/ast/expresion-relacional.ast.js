@@ -16,7 +16,7 @@ class ExpresionRelacional {
     constructor(expresionIzquierda, expresionDerecha, operador, fila, columna) {
         this.nombre = "ExpresionRelacional";
         this.expresionIzquierda = expresionIzquierda;
-        this.right = expresionDerecha;
+        this.expresionDerecha = expresionDerecha;
         this.operador = operador;
         this.fila  = fila;
         this.columna = columna;

@@ -165,6 +165,7 @@
                         tipoDatoPrimitivo(token.tipo.nombre, token.tipo.nombre + id + i);
                         listaParametros(token.parametro, token.nombre + id + (i+i+1));
                         listaDeclaracion(token.lista, token.nombre + id + (i+i+2))
+                        listaRetorno(token.retorno, token.nombre + id + (i+i+3))
                         break;
                     case "Metodo":
                         ////console.log("METODO")
@@ -287,15 +288,51 @@
         function listaParametros(lista, token){
             //console.log(lista)
             //console.log(token)
+            if(lista.length > 0) {
+                strArbolAST = strArbolAST + "<li><span>" +
+                    "<a style=\"color:#365902; text-decoration:none;\" data-toggle=\"collapse\" href=\"#" + token +
+                    "\" aria-expanded=\"false\" aria-controls=\"" + token + "\">" +
+                    "<i class=\"collapsed\">" +
+                    "<i class=\"fas fa-leaf\"></i></i>" +
+                    "<i class=\"expanded\"><i class=\"fas fa-leaf\"></i></i> " + "Parametro" + "</a></span>" +
+                    "<ul><div id=\"" + token + "\" class=\"collapse\">";
+            
+                listaDeclaracion(lista, token);                  
+                strArbolAST = strArbolAST + "</ul>\n</li>";  
+            }
+        }
+
+        /**
+         * ARBOL AST MAS PARAMETROS
+         */
+         function listaDeclaracion(lista, tagIdentificador){
+            strArbolAST = strArbolAST + "<li><span>" +
+            "<a style=\"color:#365902; text-decoration:none;\" data-toggle=\"collapse\" href=\"#" + "lst" + tagIdentificador +
+            "\" aria-expanded=\"false\" aria-controls=\"" + "lst" + tagIdentificador + "\">" +
+            "<i class=\"collapsed\">" +
+            "<i class=\"fas fa-leaf\"></i></i>" +
+            "<i class=\"expanded\"><i class=\"fas fa-leaf\"></i></i> " + "Lista de Parametros" + "</a></span>" +
+            "<ul><div id=\"" + "lst" + tagIdentificador + "\" class=\"collapse\">";
+    
+            obtenerElemento(lista, tagIdentificador)
+            strArbolAST = strArbolAST  + "</div></ul></li>";
+        }
+
+        /**
+         * ARBOL AST PARAMETROS 
+         */
+         function listaRetorno(lista, token){
+            console.log(lista)
+            //console.log(token)
             strArbolAST = strArbolAST + "<li><span>" +
                 "<a style=\"color:#365902; text-decoration:none;\" data-toggle=\"collapse\" href=\"#" + token +
                 "\" aria-expanded=\"false\" aria-controls=\"" + token + "\">" +
                 "<i class=\"collapsed\">" +
                 "<i class=\"fas fa-leaf\"></i></i>" +
-                "<i class=\"expanded\"><i class=\"fas fa-leaf\"></i></i> " + "Parametro" + "</a></span>" +
+                "<i class=\"expanded\"><i class=\"fas fa-leaf\"></i></i> " + lista.nombre + "</a></span>" +
                 "<ul><div id=\"" + token + "\" class=\"collapse\">";
             
-            obtenerElemento(lista, token);                  
+            //obtenerElemento(lista, token);                  
             strArbolAST = strArbolAST + "</ul>\n</li>";    
         }
     </SCRIPT>

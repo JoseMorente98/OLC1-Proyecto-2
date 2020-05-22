@@ -16,7 +16,7 @@ class ExpresionLogica {
     constructor(expresionIzquierda, expresionDerecha, operador, fila, columna) {
         this.nombre = "ExpresionLogica";
         this.expresionIzquierda = expresionIzquierda;
-        this.right = expresionDerecha;
+        this.expresionDerecha = expresionDerecha;
         this.operador = operador;
         this.fila  = fila;
         this.columna = columna;

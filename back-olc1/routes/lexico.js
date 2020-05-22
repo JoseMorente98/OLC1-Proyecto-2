@@ -16,7 +16,6 @@ router.post('/', function(req, res, next) {
   
     var columna = 0;
     var fila = 0;
-    var array = [];
     analizadorLexico.setInput(data.entrada);
     while (!analizadorLexico.done) {
         token = analizadorLexico.lex();
