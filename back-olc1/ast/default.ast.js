@@ -10,7 +10,7 @@ class Default  {
     /**
     * CONSTRUCTOR
     */
-    constructor( lista, fila, columna) {
+    constructor(lista, fila, columna) {
         this.nombre = "Default";
         this.lista  = lista;
         this.fila  = fila;
