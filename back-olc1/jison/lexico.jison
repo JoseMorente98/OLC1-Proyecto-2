@@ -29,9 +29,10 @@ BSL               "\\".
 ":"                   return 'TK_DosPuntos';
 ";"                   return 'TK_PuntoComa';
 
-"System"              return "PR_System";
-"print"               return "PR_print";
-"println"             return "PR_println";
+"System"              return 'PR_System';
+"out"              return 'PR_out';
+"print"               return 'PR_print';
+"println"             return 'PR_println';
 "public"              return 'PR_public';
 "private"             return 'PR_private';
 "protected"           return 'PR_protected';
