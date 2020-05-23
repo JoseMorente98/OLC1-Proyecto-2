@@ -43,23 +43,37 @@
             
         </div> 
 
-        <h1 class="display-4">Tokens Errores</h1>
-        <p class="lead">Reporte de tokens errores del análisis léxico.</p>
+        <h1 class="display-4">Variables Metodo</h1>
         <hr class="my-4">
         <table class="table">
             <thead class="thead-light">
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Lexema</th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Fila</th>
-                <th scope="col">Columna</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Clase</th>
+                <th scope="col">Metodo</th>
+                <th scope="col">Variable</th>
             </tr>
             </thead>
             <tbody id="demo2">
             
             </tbody>
-        </table>    
+        </table>  
+        
+        <h1 class="display-4">Variables Funcion</h1>
+        <hr class="my-4">
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Tipo</th>
+                <th scope="col">Clase</th>
+                <th scope="col">Funcion</th>
+                <th scope="col">Variable</th>
+            </tr>
+            </thead>
+            <tbody id="demo3">
+            
+            </tbody>
+        </table>  
     </div>
     
     
@@ -136,7 +150,7 @@
             });
 
             $.ajax({
-                url: root + '/lexico/error',
+                url: root + '/variables',
                 method: 'GET',
                 dataType: 'json',
             }).then(function(data) {
@@ -147,14 +161,34 @@
                 miArray.forEach(element => {
                     console.log(element)
                     strText = strText + '<tr>'+
-                        '<th scope="row">' + element.id + '</th>'+
-                        '<td>' + element.lexema + '</td>'+
-                        '<td>' + element.descripcion + '</td>'+
-                        '<td>' + element.fila + '</td>'+
-                        '<td>' + element.columna + '</td>'+
+                        '<th scope="row">' + element.tipo + '</th>'+
+                        '<td>' + element.clase + '</td>'+
+                        '<td>' + element.metodo + '</td>'+
+                        '<td>' + element.variable + '</td>'+
                     '</tr>';
                 });
                 document.getElementById("demo2").innerHTML = strText;
+            });
+
+            $.ajax({
+                url: root + '/variables2',
+                method: 'GET',
+                dataType: 'json',
+            }).then(function(data) {
+                console.log(data);
+                miArray = [];
+                miArray = data;
+                var strText = "";
+                miArray.forEach(element => {
+                    console.log(element)
+                    strText = strText + '<tr>'+
+                        '<th scope="row">' + element.tipo + '</th>'+
+                        '<td>' + element.clase + '</td>'+
+                        '<td>' + element.funcion + '</td>'+
+                        '<td>' + element.variable + '</td>'+
+                    '</tr>';
+                });
+                document.getElementById("demo3").innerHTML = strText;
             });
         });
     </SCRIPT>

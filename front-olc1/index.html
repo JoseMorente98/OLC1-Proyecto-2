@@ -271,6 +271,38 @@
                         }, 1000);
                     }
                 });
+
+                /**
+                 * ANALISIS COPIA
+                 */
+                 $.ajax({
+                    url: root + '/analizar-copias2',
+                    method: 'POST',
+                    dataType: 'json',
+                    data: {
+                        entrada: textAreaEditorDeTexto.value,
+                        entradaCopia: textAreaEditorDeTexto2.value
+                    }
+                }).then(function(data) {
+                    console.log(data)
+                    //console.log(data.ast);
+                    //localStorage.setItem("currentAST", JSON.stringify(data.ast));
+                    ///var AST = localStorage.getItem("currentAST");
+                    //console.log(data.ast)
+                    //console.log(JSON.parse(AST))
+                    /*if(data.status == 200) {
+                        $('#analisisExitoSintactico').show();
+                        setTimeout(() => {
+                            $('#analisisExitoSintactico').hide();
+                        }, 1000);
+                    }
+                    if(data.status == 400) {
+                        $('#analisisErrorSintactico').show();
+                        setTimeout(() => {
+                            $('#analisisErrorSintactico').hide();
+                        }, 1000);
+                    }*/
+                });
            }
         );
 
