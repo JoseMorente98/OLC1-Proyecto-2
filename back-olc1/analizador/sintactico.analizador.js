@@ -5,9 +5,9 @@ class SintacticoAnalizador {
         if(arregloErrorSintactico != undefined) {
             if(arregloErrorSintactico != []) {
                 arregloErrorSintactico.forEach(data => {
-                    console.log("===================================")
+                    /*console.log("===================================")
                     console.log(data)
-                    console.log(data.nombre)
+                    console.log(data.nombre)*/
                     if(data.nombre == 'Excepcion') {
                         this.arregloErrorSintactico.push(data);
                     } else {

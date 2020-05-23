@@ -45,7 +45,7 @@
                 <div class="tree ">
                     <ul>
                         <li>
-                            <span><a style="color:#365902; text-decoration:none;" data-toggle="collapse" href="#Class" aria-expanded="true"aria-controls="Class"><i class="collapsed"><i class="fas fa-tree"></i></i><i class="expanded"><i class="fas fa-tree"></i></i> Clase</a></span>
+                            <span><a style="color:#365902; text-decoration:none;" data-toggle="collapse" href="#Class" aria-expanded="true"aria-controls="Class"><i class="collapsed"><i class="fas fa-tree"></i></i><i class="expanded"><i class="fas fa-tree"></i></i> Raiz</a></span>
                             <div id="Class" class="collapse show"><ul><li><span><a style="color:#365902; text-decoration:none;" data-toggle="collapse" href="#instList" aria-expanded="false" aria-controls="instList"><i class="collapsed"><i class="fas fa-leaf"></i></i><i class="expanded"><i class="fas fa-leaf"></i></i> Lista de Instrucciones</a></span><ul>
                                 <div id="ArbolAST"></div>
                             </div></ul></li></ul>
@@ -81,6 +81,10 @@
                         "<ul><div id=\"" + token.nombre + id + i + "\" class=\"collapse\">";
                 
                 switch (token.nombre) {
+                    case "Clase":
+                        //tipoDatoPrimitivo(token.tipo.nombre, token.tipo.nombre + id + i);
+                        obtenerElemento(token.lista, token.identificador)
+                        break;
                     case "Declaracion":
                         tipoDatoPrimitivo(token.tipo.nombre, token.tipo.nombre + id + i);
                         ////console.log("DECLARACION")

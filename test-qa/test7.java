@@ -2,48 +2,52 @@ class Funcion {
 
     
     void metodo() {
-
+hola = hola;
     }
 
-    String nombre(String nombre, int abc, int acs) {
+    void metodo2(int a, int b, int c, int d) {
+        hola = hola;
+            }
+
+    String nombreA(String nombre, int abc, int acs) {
         int a;
         String b;
         return true;
     }
 
 
-    String nombre() {
+    String nombreB() {
 int hola;
         return abc;
     }
 
-    int nombre() {
+    int nombreC() {
 int abc;
-hoal;
+hoal=12;
         return "HOla"+nombre;
     }
 
-    int nombre() {
+    int nombreD() {
 int c;
         return a+v+b+s;
     }
 
-    double nombre() {
+    double nombreE() {
 int a;
         return a+v+b+s;
     }
 
-    double nombre() {
+    double nombreF() {
 int d;
         return a+v+b+s;
     }
 
-    char nombre() {
+    char nombreG() {
 int a;
         return a+v+b+s;
     }
 
-    char nombre() {
+    char nombreH() {
 int a;
         return a+v+b+s;
     }

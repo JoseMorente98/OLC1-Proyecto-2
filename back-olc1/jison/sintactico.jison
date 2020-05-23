@@ -194,11 +194,11 @@ VALOR
     |                               {$$ = null;}
     ;
 
-TIPO_DATO : 'PR_int'        {$$ = new TipoDato('PR_int');}
-     | 'PR_String'     {$$ = new TipoDato('string');}
-     | 'PR_boolean'    {$$ = new TipoDato('PR_boolean');}
-     | 'PR_char'       {$$ = new TipoDato('PR_char');}
-     | 'PR_double'     {$$ = new TipoDato('PR_double');}
+TIPO_DATO : 'PR_int'        {$$ = new TipoDato('int');}
+     | 'PR_String'     {$$ = new TipoDato('String');}
+     | 'PR_boolean'    {$$ = new TipoDato('boolean');}
+     | 'PR_char'       {$$ = new TipoDato('char');}
+     | 'PR_double'     {$$ = new TipoDato('double');}
      ;
 
 PARAMETROS 

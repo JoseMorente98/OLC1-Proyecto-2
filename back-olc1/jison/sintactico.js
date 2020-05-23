@@ -130,19 +130,19 @@ case 26: case 27:
 this.$ = null;
 break;
 case 28:
-this.$ = new TipoDato('PR_int');
+this.$ = new TipoDato('int');
 break;
 case 29:
-this.$ = new TipoDato('string');
+this.$ = new TipoDato('String');
 break;
 case 30:
-this.$ = new TipoDato('PR_boolean');
+this.$ = new TipoDato('boolean');
 break;
 case 31:
-this.$ = new TipoDato('PR_char');
+this.$ = new TipoDato('char');
 break;
 case 32:
-this.$ = new TipoDato('PR_double');
+this.$ = new TipoDato('double');
 break;
 case 37: case 38:
 this.$ = new Declaracion($$[$0-1], $$[$0], null, this._$.first_line, this._$.first_column);  
