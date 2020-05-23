@@ -257,26 +257,30 @@ class ComparadorControlador {
     evaluarVariables() {
         for (let i = 0; i < this.arregloGlobalVariables.length; i++) {
             const element = this.arregloGlobalVariables[i];
-            console.log(element)
-            if(element.metodo.lista) {
+            console.log(element.funcion);
+            if(element.metodo) {
                 console.log("====================METODOS========================")
                 //c/onsole.log(element.metodo.lista)
                 element.metodo.lista.forEach(data => {
+                    console.log(data)
                     if(data.nombre = "Declaracion") {
-                        console.log(data)
+                       // console.log(data)
                         var object = {
                             clase: element.clase,
                             metodo: element.metodo.identificador,
                             variable: data
                         }
+                        //console.log(object)
                         this.arregloGlobalVariablesMetodo.push(object)
                     }
                 });
 
-            } else if(element.funcion.lista) {
+            } else if(element.funcion) {
                 console.log("====================FUNCION========================")
                 ////console.log(element.funcion.lista)
                 element.funcion.lista.forEach(data => {
+                    console.log(data)
+
                     if(data.nombre = "Declaracion") {
                         console.log(data)
                         var object = {
@@ -295,7 +299,7 @@ class ComparadorControlador {
         for (let i = 0; i < this.arregloGlobalVariables.length; i++) {
             const element = this.arregloGlobalVariables2[i];
             //console.log(element)
-            if(element.metodo.lista) {
+            if(element.metodo) {
                 //console.log("====================METODOS========================")
                 //c/onsole.log(element.metodo.lista)
                 element.metodo.lista.forEach(data => {
@@ -310,7 +314,7 @@ class ComparadorControlador {
                     }
                 });
 
-            } else if(element.funcion.lista) {
+            } else if(element.funcion) {
                 //console.log("====================FUNCION========================")
                 ////console.log(element.funcion.lista)
                 element.funcion.lista.forEach(data => {
@@ -329,11 +333,12 @@ class ComparadorControlador {
         }
 
         this.arregloGlobalVariablesMetodo.forEach(element => {
+            console.error(element)
             this.arregloGlobalVariablesMetodo2.forEach(element2 => {
                 if(element.clase == element2.clase) {
                     if(element.metodo == element2.metodo) {
                         if(element.variable.identificador == element2.variable.identificador) {
-                            if(element.variable.tipo.tipo == element2.variable.tipo.tipo) {
+                            //if(element.variable.tipo.tipo == element2.variable.tipo.tipo) {
                                 
                                 var data = {
                                     clase: element.clase,
@@ -342,7 +347,7 @@ class ComparadorControlador {
                                     tipo: element.variable.tipo.tipo
                                 }
                                 this.arregloReporteMetodosVariable.push(data);
-                            }
+                            //}
                         }
                     }
                 }
@@ -356,7 +361,7 @@ class ComparadorControlador {
                 if(element.clase == element2.clase) {
                     if(element.funcion == element2.funcion) {
                         if(element.variable.identificador == element2.variable.identificador) {
-                            if(element.variable.tipo.tipo == element2.variable.tipo.tipo) {
+                            //if(element.variable.tipo.tipo == element2.variable.tipo.tipo) {
                                 var data = {
                                     clase: element.clase,
                                     funcion: element.funcion,
@@ -364,7 +369,7 @@ class ComparadorControlador {
                                     tipo: element.variable.tipo.tipo
                                 }
                                 this.arregloReporteFuncionesVariable.push(data);
-                            }
+                           // }
                         }
                     }
                 }
