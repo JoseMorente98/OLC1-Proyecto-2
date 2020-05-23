@@ -33,18 +33,9 @@ BSL               "\\".
 "out"              return 'PR_out';
 "print"               return 'PR_print';
 "println"             return 'PR_println';
-"public"              return 'PR_public';
-"private"             return 'PR_private';
-"protected"           return 'PR_protected';
-
 "static"              return 'PR_static';
 "main"                return 'PR_main';
-
-"final"               return 'PR_final';
-
 "void"                return 'PR_void';
-
-"package"             return 'PR_package'; /* Keywords */
 "import"              return 'PR_import';
 "if"                  return 'PR_if';
 "else"                return 'PR_else';
@@ -56,20 +47,11 @@ BSL               "\\".
 "switch"              return 'PR_switch';
 "case"                return 'PR_case';
 "default"             return 'PR_default';
-
 "true"                return 'PR_true';
 "false"               return 'PR_false';
-
 "class"               return 'PR_class';
-"extends"             return 'PR_extends';
-"interface"           return 'PR_interface';
-"abstract"            return 'PR_abstract';
-"this"                return 'PR_this';
-"super"               return 'PR_super';
-
 "new"                 return 'PR_new';
 "return"              return 'PR_return';
-
 "boolean"             return 'PR_boolean';
 "int"                 return 'PR_int';
 "double"              return 'PR_double';

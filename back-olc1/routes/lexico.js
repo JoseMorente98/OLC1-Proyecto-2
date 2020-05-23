@@ -11,7 +11,8 @@ router.post('/', function(req, res, next) {
     var strData="";
     var body = req.body;
     var data = {
-        entrada: body.entrada
+        entrada: body.entrada,
+        entradaCopia: body.entradaCopia,
     }
   
     var columna = 0;
@@ -21,7 +22,7 @@ router.post('/', function(req, res, next) {
         token = analizadorLexico.lex();
         columna = analizadorLexico.yylloc.first_column;
         fila = analizadorLexico.yylloc.first_line;
-        console.log('<' + token + ', ' + analizadorLexico.yytext + "Fila: " + fila + " Columna: "+ columna + '>')
+        //console.log('<' + token + ', ' + analizadorLexico.yytext + "Fila: " + fila + " Columna: "+ columna + '>')
         if(token=='TK_Desconocido') {
             tokenControlador.agregarError(analizadorLexico.yytext, token, fila, columna);
         }else if(token=='EOF') {
@@ -31,11 +32,21 @@ router.post('/', function(req, res, next) {
         }
     }
 
-    res.status(200).json({
-        status: 200,
-        ok: true,
-        data: "Análisis Completo"
-    });
+    if(tokenControlador.getArregloError().length == 0) {
+        res.status(200).json({
+            status: 200,
+            ok: true,
+            data: "Análisis Completo."
+        });
+    } else {
+        res.status(200).json({
+            status: 400,
+            ok: true,
+            data: "Análisis Completo."
+        });
+    }
+
+    
 });
 
 router.get('/token', function(req, res, next) {

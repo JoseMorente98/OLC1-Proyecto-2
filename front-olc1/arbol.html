@@ -34,21 +34,27 @@
     </nav>
 
     <div class="container">
+        
         <h1 class="display-4">Arbol AST</h1>
         <p class="lead">Reporte de ARBOL AST del análisis sintáctico.</p>
         <button class="btn btn-outline-dark" onclick="window.print()" role="button"><i class="fas fa-save"></i> Guardar Reporte</button>
         <hr class="my-4">
-        <div class="tree ">
-            <ul>
-                <li>
-                    <span><a style="color:#365902; text-decoration:none;" data-toggle="collapse" href="#Class" aria-expanded="true"aria-controls="Class"><i class="collapsed"><i class="fas fa-tree"></i></i><i class="expanded"><i class="fas fa-tree"></i></i> Clase</a></span>
-                    <div id="Class" class="collapse show"><ul><li><span><a style="color:#365902; text-decoration:none;" data-toggle="collapse" href="#instList" aria-expanded="false" aria-controls="instList"><i class="collapsed"><i class="fas fa-leaf"></i></i><i class="expanded"><i class="fas fa-leaf"></i></i> Lista de Instrucciones</a></span><ul>
-                        <div id="ArbolAST"></div>
-                    </div></ul></li></ul>
-                    </div>
-                </li>
-            </ul>
-        </div>
+        <div class="card">
+            <div class="card-header">Arbol AST</div>
+            <div class="card-body">
+                <div class="tree ">
+                    <ul>
+                        <li>
+                            <span><a style="color:#365902; text-decoration:none;" data-toggle="collapse" href="#Class" aria-expanded="true"aria-controls="Class"><i class="collapsed"><i class="fas fa-tree"></i></i><i class="expanded"><i class="fas fa-tree"></i></i> Clase</a></span>
+                            <div id="Class" class="collapse show"><ul><li><span><a style="color:#365902; text-decoration:none;" data-toggle="collapse" href="#instList" aria-expanded="false" aria-controls="instList"><i class="collapsed"><i class="fas fa-leaf"></i></i><i class="expanded"><i class="fas fa-leaf"></i></i> Lista de Instrucciones</a></span><ul>
+                                <div id="ArbolAST"></div>
+                            </div></ul></li></ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>        
     </div>
     
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -336,6 +342,6 @@
             strArbolAST = strArbolAST + "</ul>\n</li>";    
         }
     </SCRIPT>
-    <style>.tree li { list-style-type:none; margin:0; padding:10px 5px 0 5px; position:relative }.tree li::before, .tree li::after {content:'';left:-20px; position:absolute; right:auto}.tree li::before { border-left:2px solid #365902; bottom:50px; height:100%; top:0; width:1px}.tree li::after { border-top:2px solid #365902; height:20px; top:25px; width:25px }.tree li span { -moz-border-radius:5px; -webkit-border-radius:5px; border:2px solid #365902; border-radius:3px; display:inline-block; padding:3px 8px; text-decoration:none; cursor:pointer; }.tree>ul>li::before, .tree>ul>li::after { border:0 }.tree li:last-child::before { height:27px } .tree li span:hover { background: #007bff; border:2px solid #007bff; }[aria-expanded="false"] > .expanded, [aria-expanded="true"] > .collapsed { display: none; }</style>
+    <style>.tree li { list-style-type:none; margin:0; padding:10px 5px 0 5px; position:relative }.tree li::before, .tree li::after {content:'';left:-20px; position:absolute; right:auto}.tree li::before { border-left:2px solid #365902; bottom:50px; height:100%; top:0; width:1px}.tree li::after { border-top:2px solid #365902; height:20px; top:25px; width:25px }.tree li span { -moz-border-radius:5px; -webkit-border-radius:5px; border-radius:3px; display:inline-block; padding:3px 8px; text-decoration:none; cursor:pointer; }.tree>ul>li::before, .tree>ul>li::after { border:0 }.tree li:last-child::before { height:27px } .tree li span:hover { background: #007bff; border:2px solid #007bff; }[aria-expanded="false"] > .expanded, [aria-expanded="true"] > .collapsed { display: none; }</style>
 </body>
 </html>

@@ -74,13 +74,25 @@
             </div>
         </div>
         <div class="alert alert-success alert-dismissible fade show" role="alert" id="analisisExito">
-            <strong>Análisis Ejecutado Exitosamente.</strong>
+            <strong>Análisis léxico ejecutado exitosamente.</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="alert alert-primary alert-dismissible fade show" role="alert" id="analisisExitoSintactico">
+            <strong>Análisis sintáctico ejecutado exitosamente.</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="alert alert-danger alert-dismissible fade show" role="alert" id="analisisError">
-            <strong>Consulte los errores en la sección de reportes.</strong>
+            <strong>Análisis léxico ejecutado con errores.</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" id="analisisErrorSintactico">
+            <strong>Análisis sintáctico ejecutado con errores.</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -98,6 +110,8 @@
             console.clear();
             $('#analisisExito').hide();
             $('#analisisError').hide();
+            $('#analisisExitoSintactico').hide();
+            $('#analisisErrorSintactico').hide();
         });
         var cntline;
     
@@ -192,26 +206,68 @@
 
         $("#button").click( function()
            {
+               /**
+                 * ANALISIS SINTACTICO
+                 */
                 var textAreaEditorDeTexto = document.getElementById("editorDeTexto");
+                var textAreaEditorDeTexto2 = document.getElementById("editorDeTexto2");
                 console.log(textAreaEditorDeTexto.value);
                 $.ajax({
-                    url: root + '/sintactico',
+                    url: root + '/lexico',
                     method: 'POST',
                     dataType: 'json',
                     data: {
                         entrada: textAreaEditorDeTexto.value,
-                        entradaCopia: textAreaEditorDeTexto.value
+                        entradaCopia: textAreaEditorDeTexto2.value
                     }
                 }).then(function(data) {
-                    console.log(data.ast);
-                    localStorage.setItem("currentAST", JSON.stringify(data.ast.lista));
-                    var AST = localStorage.getItem("currentAST");
-                    console.log(data.ast)
-                    console.log(JSON.parse(AST))
+                    //console.log(data.ast);
+                    //localStorage.setItem("currentAST", JSON.stringify(data.ast.lista));
+                    ///var AST = localStorage.getItem("currentAST");
+                    //console.log(data.ast)
+                    //console.log(JSON.parse(AST))
                     if(data.status == 200) {
                         $('#analisisExito').show();
                         setTimeout(() => {
                             $('#analisisExito').hide();
+                        }, 1000);
+                    }
+                    if(data.status == 400) {
+                        $('#analisisError').show();
+                        setTimeout(() => {
+                            $('#analisisError').hide();
+                        }, 1000);
+                    }
+                });
+
+                /**
+                 * ANALISIS SINTACTICO Y COPIA
+                 */
+                $.ajax({
+                    url: root + '/analizar-copias',
+                    method: 'POST',
+                    dataType: 'json',
+                    data: {
+                        entrada: textAreaEditorDeTexto.value,
+                        entradaCopia: textAreaEditorDeTexto2.value
+                    }
+                }).then(function(data) {
+                    console.log(data)
+                    //console.log(data.ast);
+                    localStorage.setItem("currentAST", JSON.stringify(data.ast.lista));
+                    ///var AST = localStorage.getItem("currentAST");
+                    //console.log(data.ast)
+                    //console.log(JSON.parse(AST))
+                    if(data.status == 200) {
+                        $('#analisisExitoSintactico').show();
+                        setTimeout(() => {
+                            $('#analisisExitoSintactico').hide();
+                        }, 1000);
+                    }
+                    if(data.status == 400) {
+                        $('#analisisErrorSintactico').show();
+                        setTimeout(() => {
+                            $('#analisisErrorSintactico').hide();
                         }, 1000);
                     }
                 });

@@ -5,6 +5,7 @@ class SintacticoAnalizador {
         if(arregloErrorSintactico != undefined) {
             if(arregloErrorSintactico != []) {
                 arregloErrorSintactico.forEach(data => {
+                    console.log("===================================")
                     console.log(data)
                     console.log(data.nombre)
                     if(data.nombre == 'Excepcion') {
@@ -33,6 +34,8 @@ class SintacticoAnalizador {
                                 this.insertarErrores(data.lista);                                
                                 break;
                             case "Metodo":
+                                this.insertarErrores(data.lista);
+                            case "Clase":
                                 this.insertarErrores(data.lista);                                
                                 break;
                             case "Case":
